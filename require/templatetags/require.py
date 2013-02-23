@@ -23,10 +23,10 @@ def require_module(module, mediators):
     if not require_settings.REQUIRE_DEBUG and module in require_settings.REQUIRE_STANDALONE_MODULES:
         return u"""<script src="{module}" data-mediators="{mediators}"></script>""".format(
             module = staticfiles_storage.url(resolve_require_module(require_settings.REQUIRE_STANDALONE_MODULES[module]["out"])),
-            mediators = staticfiles_storage.url(resolve_require_module(require_settings.REQUIRE_STANDALONE_MODULES[mediators]["out"])),
+            mediators = mediators,
         )
     return u"""<script src="{src}" data-main="{module}" data-mediators="{mediators}"></script>""".format(
         src = staticfiles_storage.url(resolve_require_url(require_settings.REQUIRE_JS)),
         module = staticfiles_storage.url(resolve_require_module(module)),
-        mediators = staticfiles_storage.url(resolve_require_module(mediators)),
+        mediators = mediators,
     )
